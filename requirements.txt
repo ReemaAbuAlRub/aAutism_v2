@@ -1,0 +1,8 @@
+fastapi
+uvicorn==0.22.0
+datetime
+SQLAlchemy==2.0.13
+python-dotenv==1.0.0
+pydantic
+pydantic[email]
+python-jose==3.3.0
