@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import openai
-from apis.core.config import settings
+from app.core.config import settings
 from app.services.llm.prompt import build_messages
 
 class BaseLlmStrategy(ABC):

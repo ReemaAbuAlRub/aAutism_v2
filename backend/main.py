@@ -1,12 +1,12 @@
-from fastapi import fastapi
-from apis.base import api_router
+from fastapi import FastAPI
+from app.apis.base import api_router
 
 
 def include_router(app: FastAPI) -> None:
     app.include_router(api_router)
 
 def initiate_application() -> FastAPI :
-    app=FastAPI(title="aAutism Chatbot", version="02")
+    app=FastAPI(title="Autism Chatbot", version="02")
     #create_database()
     include_router(app)
     return app
