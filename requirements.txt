@@ -12,3 +12,6 @@ python-multipart
 psycopg[binary]
 redis
 pinecone
+passlib
+pydantic-settings
+alembic

@@ -1,9 +1,16 @@
-from pydantic import BaseModel, EmailStr, Field,Date
+from pydantic import BaseModel, EmailStr, Field
+from datetime import date
 
 class UserCreate(BaseModel):
     email: EmailStr
-    date_of_birth: Date
     password: str= Field(min_length=8)
 
 
-class
+class UserRead(BaseModel):
+    id: str
+    email: EmailStr
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str = "bearer"

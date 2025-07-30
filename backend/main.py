@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.apis.base import api_router
+from app.routers.base import api_router
 
 
 def include_router(app: FastAPI) -> None:

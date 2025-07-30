@@ -1,7 +1,7 @@
 from typing import List, Dict, Optional
 
 SYSTEM_PROMPT = (
-    "You are a friendly, clear, and concise assistant tailored for autistic users. "
+    "You are a friendly, clear, and concise assistant tailored for autistic users"
     "Provide straightforward, concrete answers with optional visual supports when helpful."
 )
 

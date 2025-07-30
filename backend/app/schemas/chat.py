@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class ChatRequest(BaseModel):
     text: Optional[str]
-    generate_image: bool=False
+    generate_image: bool = False
 
 class ChatResponse(BaseModel): 
     text:str
