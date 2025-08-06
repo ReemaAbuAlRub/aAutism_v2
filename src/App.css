@@ -1,0 +1,191 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5faff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #357ab8;
+}
+
+input,
+textarea {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border: 2px solid #4a90e2;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+/* إزالة الهوامش الافتراضية من الصفحة */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: none;
+    /* اذا بتحب تخلي الخلفية نظيفة */
+}
+
+/* تأكد أن كل شي ياخذ العرض الكامل */
+#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* الوضع الليلي */
+body.dark-mode {
+    background: linear-gradient(135deg, #0f2235, #000000);
+    color: #f1f1f1;
+    transition: background 0.4s, color 0.4s;
+}
+
+body.dark-mode .modern-header {
+    background: #0f2235;
+    color: #f1f1f1;
+}
+
+body.dark-mode .auth-btn,
+body.dark-mode .lang-btn,
+body.dark-mode .close-side {
+    background: linear-gradient(135deg, #222, #111);
+    color: #f1f1f1;
+}
+
+body.dark-mode .modal-content {
+    background: #1a1a1a;
+    color: #f1f1f1;
+}
+
+/* الوضع النهاري (الافتراضي) */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5faff;
+    color: #1d3557;
+    margin: 0;
+    padding: 0;
+    transition: background 0.4s, color 0.4s;
+}
+
+/* الوضع الليلي */
+body.dark-mode {
+    background: linear-gradient(135deg, #0f2235, #000000);
+    color: #f1f1f1;
+}
+
+/* الهيدر */
+body.dark-mode .modern-header {
+    background: #0f2235;
+    color: #f1f1f1;
+}
+
+/* أزرار عامة */
+body.dark-mode .auth-btn,
+body.dark-mode .lang-btn,
+body.dark-mode .close-side,
+body.dark-mode .mode-btn {
+    background: linear-gradient(135deg, #222, #111);
+    color: #f1f1f1;
+    border: none;
+}
+
+body.dark-mode .auth-btn:hover,
+body.dark-mode .lang-btn:hover,
+body.dark-mode .close-side:hover {
+    background: linear-gradient(135deg, #333, #111);
+}
+
+/* Dropdown */
+body.dark-mode .dropdown-menu {
+    background: #1d1d1d;
+    color: #f1f1f1;
+}
+
+body.dark-mode .dropdown-item {
+    color: #f1f1f1;
+}
+
+body.dark-mode .dropdown-item:hover {
+    background: linear-gradient(135deg, #333, #111);
+}
+
+/* القائمة الجانبية */
+body.dark-mode .side-menu {
+    background: #0f2235;
+    color: #f1f1f1;
+}
+
+/* المودالات */
+body.dark-mode .modal-content {
+    background: #1a1a1a;
+    color: #f1f1f1;
+}
+
+/* صفحة الترحيب */
+body.dark-mode .welcome-page {
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    color: #f1f1f1;
+}
+
+/* مربعات المشاعر */
+body.dark-mode .emoji-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .emoji-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* صفحة الشات */
+body.dark-mode .chat-container {
+    background: #0f2235;
+    color: #f1f1f1;
+}
+
+body.dark-mode .chat-message.bot .message-bubble {
+    background: #1a1a1a;
+    color: #f1f1f1;
+}
+
+body.dark-mode .chat-message.user .message-bubble {
+    background: #333;
+    color: #f1f1f1;
+}
+
+/* حقل الإدخال بالشات */
+body.dark-mode .chat-input {
+    background: #222;
+    color: #f1f1f1;
+    border: 1px solid #444;
+}
+
+body.dark-mode .chat-input::placeholder {
+    color: #aaa;
+}
