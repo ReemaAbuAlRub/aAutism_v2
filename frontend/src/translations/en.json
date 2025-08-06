@@ -1,0 +1,85 @@
+{
+    "appName": "Autism Assistant",
+    "welcomeTitle": "Hello {{name}} 🌼, I'm here to help you feel comfortable.",
+    "startBtn": "Let's Start",
+    "howDoYouFeel": "How do you feel today?",
+    "exercise.angry.remaining": "Remaining taps: {{count}}",
+    "moods": {
+        "happy": "Happy",
+        "calm": "Calm",
+        "neutral": "Neutral",
+        "sad": "Sad",
+        "angry": "Angry"
+    },
+    "exercise": {
+        "calm": {
+            "title": "🙂 A Peaceful Calm",
+            "text": "Take a deep breath for 4 seconds... and slowly exhale for 4 seconds 🌸"
+        },
+        "neutral": {
+            "title": "😐 It's Okay",
+            "text": "Try counting slowly to 10 with calm breathing."
+        },
+        "sad": {
+            "title": "😞 It's Okay to Feel Sad",
+            "text": "Let's try a calming breathing circle ☁️"
+        },
+        "angry": {
+            "title": "😡 Break the Rocks",
+            "text": "Tap the rock 5 times to release your anger 🪨",
+            "done": "✅ You’ve released your anger! Well done 👏"
+        }
+    },
+    "continueToChat": "Continue to Chat 💬",
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "editProfile": " Edit Profile",
+    "logout": " Log Out",
+    "darkMode": {
+        "on": "☀️ Light Mode",
+        "off": "🌙 Dark Mode"
+    },
+    "menu": {
+        "home": " Home",
+        "welcome": " Welcome",
+        "chat": " Chat",
+        "profile": " Profile",
+        "about": " About Us",
+        "close": " Close"
+    },
+    "signupPage": {
+        "signinTitle": "Sign In",
+        "signupTitle": "Create Account",
+        "questionTitle": "Do you already have an account?",
+        "yes": "🔑 Yes",
+        "no": "📝 No",
+        "signinEmailPlaceholder": "📧 Email",
+        "signinPasswordPlaceholder": "🔑 Password",
+        "signinBtn": "Sign In",
+        "signupNamePlaceholder": "👤 Full Name",
+        "signupBirthDatePlaceholder": "📅 Birth Date",
+        "signupAutismLevel": "Select Autism Level",
+        "signupAutismLevel1": "Level 1 (Mild)",
+        "signupAutismLevel2": "Level 2 (Moderate)",
+        "signupAutismLevel3": "Level 3 (Severe)",
+        "signupEmailPlaceholder": "📧 Email",
+        "signupPasswordPlaceholder": "🔑 Password",
+        "signupBtn": "Register",
+        "breathingExerciseBtn": "🧘 Breathing Exercise",
+        "breathingExerciseTitle": "Breathe Slowly",
+        "breathingExerciseText": "Inhale for 4 seconds... then exhale for 4 seconds.",
+        "popupEnterName": "👤 Please enter your name",
+        "popupSupportMsg": "We need your name to display it on your profile and at the top of pages.",
+        "popupSaveName": "💾 Save Name",
+        "popupClose": "Close",
+        "ageDisplay": "📅 Your Age: {{age}} years"
+    },
+    "chat": {
+        "placeholder": "💬 Type your message here...",
+        "send": "🚀 Send",
+        "mic": "🎤 Click to speak",
+        "listening": "🎙️ Listening...",
+        "botWelcome": "Hello {{name}} 👋, I'm here to help you!",
+        "botReply": "🌼 Thank you for sharing! How can I help you more?"
+    }
+}
