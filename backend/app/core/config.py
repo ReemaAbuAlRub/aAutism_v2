@@ -21,6 +21,12 @@ class Settings:
     JWT_SECRET: str = os.getenv("JWT_SECRET")
     ALGORITHM: str = os.getenv("ALGORITHM")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
-    
-    
+    MODERATION: str = os.getenv("MODERATION")
+    PROVIDER: str = os.getenv("PROVIDER")
+    EMBEDDING_MODEL:str = os.getenv("EMBEDDING_MODEL")
+    GPT_MODEL: str = os.getenv("GPT_MODEL")
+    GOOGLE_API_KEY: str = os.getenv("GOOGLE_API_KEY")
+
+
 settings = Settings()
+

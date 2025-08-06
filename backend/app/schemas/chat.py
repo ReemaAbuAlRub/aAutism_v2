@@ -9,4 +9,5 @@ class ChatResponse(BaseModel):
     text:str
     audio_base64: str
     image_url: Optional[str] = None
+    image_base64: Optional[str] = None
     

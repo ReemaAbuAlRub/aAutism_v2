@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from openai import AsyncOpenAI
 from app.core.config import settings
-from app.services.llm.prompt import build_messages
+from app.services.prompts.chat_prompt import build_messages
 
 class BaseLlmStrategy(ABC):
     @abstractmethod

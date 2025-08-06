@@ -19,8 +19,10 @@ class UserService:
         user = User(
             id=uuid.uuid4(),
             email=user_in.email,
-            password=token_cls.get_password_hash(user_in.password),
-            is_active=True
+            first_name=user_in.first_name,
+            last_name=user_in.last_name,
+            autism_level=user_in.autism_level,
+            password=token_cls.get_password_hash(user_in.password)
         )
         self.db.add(user)
         self.db.commit()
@@ -32,14 +34,14 @@ class UserService:
     def authenticate_user(self, email: str, password: str)-> Optional[Token]:
         user=self.db.query(User).filter(User.email==email).first()
         user_token=UserToken()
-        
+
         if not user or not user_token.verify_password(password, user.password):
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
         access_token=user_token.create_access_token({"sub": str(user.id)})
 
         return Token(access_token=access_token)
-            
 
+    
     def delete_user():
         pass

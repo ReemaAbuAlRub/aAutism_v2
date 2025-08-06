@@ -9,4 +9,6 @@ class User(Base):
     id = Column(PGUUID(as_uuid=True), primary_key=True, default=uuid.uuid4,unique=True,nullable=False)
     email= Column(String, nullable=False, unique=True)
     password= Column(String, nullable=False)
-    is_active=Column(Boolean,default=True)
+    first_name= Column(String, nullable=False)
+    last_name= Column(String, nullable=False)
+    autism_level= Column(String, nullable=False)
