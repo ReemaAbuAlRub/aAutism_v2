@@ -17,7 +17,7 @@ class OPenAIFactory(BaseLlmFactory):
     def __init__(self):
         self.client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
         self.model = settings.GPT_MODEL
-        self.temperature = 0.2
+        self.temperature = 0.3
 
     async def generate(self, message: str, autism_level : str, history: list[dict] = None) -> str:
         messages=build_messages(

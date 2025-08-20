@@ -1,0 +1,249 @@
+.welcome-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1d3557, #0f2235);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.robot-img {
+    width: 120px;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.start-btn {
+    background: linear-gradient(135deg, #457b9d, #1d3557);
+    color: white;
+    border: none;
+    padding: 14px 26px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.start-btn:hover {
+    transform: scale(1.05);
+}
+
+/* mood box */
+.mood-box h2 {
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.emoji-options {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.emoji-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 16px;
+    width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.emoji-card:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.emoji {
+    font-size: 42px;
+}
+
+.emoji-label {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #f1faee;
+}
+
+/* نافذة التمرين */
+.exercise-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    color: #1d3557;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+/* زر الإغلاق ❌ */
+.close-btn {
+    position: absolute;
+    top: -12px;
+    /* تطلع لفوق شوي */
+    right: -12px;
+    /* تروح لليمين شوي */
+    background: #e63946;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    /* عشان تكون فوق كل شيء */
+}
+
+.close-btn:hover {
+    background: #b02a37;
+    transform: scale(1.1) rotate(10deg);
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #118ab2;
+}
+
+.breathing-circle {
+    width: 100px;
+    height: 100px;
+    background: #a8dadc;
+    border-radius: 50%;
+    margin: 20px auto;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.countdown {
+    font-size: 24px;
+    margin: 15px 0;
+    font-weight: bold;
+    color: #ef476f;
+}
+
+.continue-btn {
+    background: linear-gradient(135deg, #06d6a0, #118ab2);
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.continue-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #118ab2, #073b4c);
+}
+
+/* لعبة الصخور */
+.rock-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.rock {
+    font-size: 100px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s ease;
+}
+
+.rock:hover {
+    transform: scale(1.1);
+}
+
+.rock p {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #1d3557;
+    font-weight: bold;
+}
+
+/* تعديل نافذة التمرين */
+.exercise-modal .modal-content {
+    background: white;
+    color: #1d3557;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.25);
+    animation: fadeInModal 0.6s ease;
+}
+
+/* حركة الظهور */
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.welcome-page.dark {
+    background: linear-gradient(135deg, #0f2235, #000000);
+    color: #f1f1f1;
+    transition: background 0.4s, color 0.4s;
+}
+
+.welcome-page.dark .modal-content {
+    background: #1a1a1a;
+    color: #f1f1f1;
+}

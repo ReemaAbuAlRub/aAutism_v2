@@ -1,0 +1,99 @@
+.modern-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1d3557;
+    color: white;
+    padding: 12px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.2);
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  
+  .menu-icon {
+    font-size: 20px; cursor: pointer; border: none;
+    background: linear-gradient(135deg, #457b9d, #1d3557);
+    color: white; border-radius: 10px; padding: 8px 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  .menu-icon:hover { transform: scale(1.05); background: linear-gradient(135deg, #1d3557, #0f2235); }
+  
+  .back-btn {
+    background: linear-gradient(135deg, #457b9d, #1d3557);
+    color: white; border: none; padding: 8px 12px; border-radius: 10px;
+    font-size: 16px; cursor: pointer; font-weight: bold; height: 40px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  .back-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #1d3557, #0f2235); }
+  
+  .logo-center { display: flex; align-items: center; gap: 10px; }
+  .logo-img { width: 34px; height: 34px; }
+  .logo-text { font-size: 20px; font-weight: 600; }
+  
+  .actions-section { display: flex; align-items: center; gap: 12px; }
+  .mode-btn { background: transparent; border: none; font-size: 20px; cursor: pointer; }
+  .lang-dropdown { position: relative; display: inline-block; }
+  .lang-btn {
+    background: linear-gradient(135deg, #457b9d, #1d3557);
+    color: white; border: none; padding: 8px 14px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .auth-btn {
+    background: linear-gradient(135deg, #457b9d, #1d3557);
+    color: white; border: none; padding: 10px 18px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .auth-btn.signin { background: linear-gradient(135deg, #06d6a0, #118ab2); }
+  .auth-btn.signup { background: linear-gradient(135deg, #ef476f, #d62828); }
+  
+  .user-chip { display: flex; align-items: center; gap: 8px; }
+  .user-chip .avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #2a4c74;
+  }
+  
+  .subnav {
+    display: flex; gap: 16px; justify-content: center; align-items: center;
+    background: #1d3557; color: #fff; padding: 6px 0;
+  }
+  .subnav-link { color: #a8dadc; text-decoration: none; padding: 6px 10px; border-radius: 8px; }
+  .subnav-link.active, .subnav-link:hover { color: #fff; background: rgba(255,255,255,0.08); }
+  
+  /* Side menu + overlay */
+  .menu-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1500; cursor: pointer;
+  }
+  .side-menu {
+    position: fixed; top: 0; left: 0; height: 100%; width: 260px;
+    background: #1d3557; color: white; padding: 40px 20px;
+    display: flex; flex-direction: column; gap: 30px; z-index: 2000;
+    transition: transform .25s ease;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.4);
+  }
+  .side-menu-links { display: flex; flex-direction: column; gap: 20px; }
+  .side-menu-links a, .side-menu-links button {
+    text-decoration: none; color: white; font-size: 18px; background: none; border: none;
+    text-align: left; cursor: pointer;
+  }
+  .side-menu-links a:hover, .side-menu-links button:hover { color: #a8dadc; }
+  .about-btn {
+    background: linear-gradient(135deg, #06d6a0, #118ab2);
+    color: white !important; padding: 12px; border-radius: 10px; font-weight: bold;
+  }
+  .logout-container { margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); }
+  .close-side {
+    background: #e63946; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold;
+  }
+  .close-side:hover { background: #b02a37; }
+  
+  body.dark-mode { background-color: #121212; color: #f1f1f1; transition: all .3s ease; }
+  body.dark-mode .modern-header { background-color: #1a1a1a; }
+  body.dark-mode .subnav { background: #1a1a1a; }
+  body.dark-mode .auth-btn { background-color: #333; color: #fff; }
+  body.dark-mode .side-menu { background: #0f2235; }

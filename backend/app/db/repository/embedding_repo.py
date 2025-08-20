@@ -1,4 +1,5 @@
-from typing import List, Dict,Optional
+from typing import List, Optional, Dict, Any
+
 
 class EmbeddingRepository:
     def __init__(self, index):
@@ -17,17 +18,21 @@ class EmbeddingRepository:
         """
         self.index.upsert(vectors=vectors)
     
-    def query(self, vector: List[float], top_k: int = 5, namespace: Optional[str] = None):
-        """
-        Query the index for similar vectors.
-        """
-        response = self.index.query(
-            vector=vector,
-            top_k=top_k,
-            include_metadata=True,
-            namespace=namespace
-        )
-        return response.matches
+    def query(
+            self,
+            vector: List[float],
+            top_k: int = 8,
+            include_metadata: bool = True,
+            metadata_filter: Optional[Dict[str, Any]] = None,
+        ):
+            # Why: use 'filter' (dict) and includeMetadata=True to get metadata back
+            res = self.index.query(
+                vector=vector,
+                top_k=top_k,
+                include_metadata=include_metadata,
+                filter=metadata_filter or {},
+            )
+            return getattr(res, "matches", []) or []
     
     def query_by_id(self, id: str, top_k: int = 5, namespace: Optional[str] = None):
         """

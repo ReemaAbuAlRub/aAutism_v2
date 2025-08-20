@@ -30,3 +30,22 @@ async def chat( req: ChatRequest ,db: Session = Depends(get_db), current_user: U
 async def moderation(text: str, moderation_service:ModerationService = Depends(ModerationService)):
     await moderation_service.check(text)
     return {"detail": "OK"} 
+
+@router.get("/debug/session/{user_id}")
+async def debug_session(user_id: str):
+    """Debug endpoint to see current session"""
+    from app.services.chat_service import ChatService
+    history = ChatService.user_sessions.get(user_id, [])
+    return {
+        "user_id": user_id,
+        "message_count": len(history),
+        "messages": history[-10:]  # Last 10 messages
+    }
+
+@router.delete("/debug/session/{user_id}")
+async def clear_session(user_id: str):
+    """Clear user session for testing"""
+    from app.services.chat_service import ChatService
+    if user_id in ChatService.user_sessions:
+        del ChatService.user_sessions[user_id]
+    return {"message": "Session cleared"}

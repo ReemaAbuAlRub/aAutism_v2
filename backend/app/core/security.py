@@ -3,6 +3,7 @@ from typing import Any, Dict
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from app.core.config import settings
+from app.db.models.user import User
 
 class UserToken:
     def __init__(self):
@@ -11,7 +12,7 @@ class UserToken:
                 default="pbkdf2_sha256",
                 deprecated="auto",
             )
-    
+
     def verify_password(self, plain_password: str, hashed_password: str) -> bool:
         return self.pwd_context.verify(plain_password, hashed_password)
 
@@ -21,7 +22,7 @@ class UserToken:
 
 
     def create_access_token(self, data: Dict[str, Any],expires_delta: timedelta | None = None) -> str:
-        to_encode = data.copy()
+        to_encode =  data.copy()
         expire = datetime.utcnow() + (
             expires_delta
             if expires_delta is not None

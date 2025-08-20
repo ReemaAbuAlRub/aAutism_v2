@@ -7,7 +7,7 @@ load_dotenv()
 
 class Settings:
     OPENAI_API_KEY:str = os.getenv("OPENAI_API_KEY")
-    IMAGE_MODEL: str = "dall-e-3"
+    IMAGE_MODEL: str = "gpt-4.1"
     POSTGRES_USER : str = os.getenv("POSTGRES_USER","reema")
     POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
     POSTGRES_SERVER : str = os.getenv("POSTGRES_SERVER","localhost")

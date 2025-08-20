@@ -151,6 +151,200 @@
 //     );
 // }
 
+
+// import React, { useState, useEffect, useRef } from "react";
+// import { useTranslation } from "react-i18next";
+// import "./../styles/Chat.css";
+
+// const API = "http://localhost:8000/api/v1/chat";
+
+// export default function Chat({ username, darkMode }) {
+//   const { t, i18n } = useTranslation();
+
+//   const [messages, setMessages] = useState([
+//     {
+//       id: 1,
+//       text: t("chat.botWelcome", { name: username || t("friend") }),
+//       sender: "bot",
+//     },
+//   ]);
+//   const [input, setInput] = useState("");
+//   const generateImage = true; // always on, hidden
+//   const [listening, setListening] = useState(false);
+//   const recognitionRef = useRef(null);
+//   const messagesEndRef = useRef(null);
+
+//   useEffect(() => {
+//     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+//   }, [messages]);
+
+//   const playTTS = (audioBase64) => {
+//     if (!audioBase64) return;
+//     const audio = new Audio(`data:audio/mp3;base64,${audioBase64}`);
+//     audio.play().catch(() => {});
+//   };
+
+//   const handleSend = async () => {
+//     const text = input.trim();
+//     if (!text) return;
+
+//     // Add user message
+//     setMessages((prev) => [...prev, { id: Date.now(), text, sender: "user" }]);
+//     setInput("");
+
+//     const token = localStorage.getItem("token");
+//     if (!token) {
+//       alert("⚠️ You must be logged in to chat.");
+//       return;
+//     }
+
+//     // Add typing indicator
+//     const typingId = Date.now() + 0.5;
+//     setMessages((prev) => [
+//       ...prev,
+//       { id: typingId, text: "typing", sender: "bot-typing" },
+//     ]);
+
+//     try {
+//       const resp = await fetch(API + "/", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token}`,
+//         },
+//         body: JSON.stringify({ text, generate_image: generateImage }),
+//       });
+
+//       if (!resp.ok) {
+//         const err = await resp.json().catch(() => ({}));
+//         throw new Error(err.detail || resp.statusText);
+//       }
+
+//       const data = await resp.json();
+
+//       // Replace typing indicator with actual message
+//       setMessages((prev) =>
+//         prev.map((m) =>
+//           m.id === typingId
+//             ? {
+//                 id: Date.now() + 1,
+//                 text: data.text,
+//                 sender: "bot",
+//                 image: data.image_url || null,
+//                 audioBase64: data.audio_base64 || null,
+//               }
+//             : m
+//         )
+//       );
+//     } catch (e) {
+//       setMessages((prev) =>
+//         prev.map((m) =>
+//           m.id === typingId
+//             ? { id: Date.now() + 2, text: "⚠️ " + e.message, sender: "bot" }
+//             : m
+//         )
+//       );
+//     }
+//   };
+
+//   const startListening = () => {
+//     if (!("webkitSpeechRecognition" in window)) {
+//       alert("⚠️ Your browser does not support speech recognition.");
+//       return;
+//     }
+//     const recognition = new window.webkitSpeechRecognition();
+//     recognition.lang = i18n.language === "en" ? "en-US" : "ar-SA";
+//     recognition.continuous = false;
+//     recognition.interimResults = false;
+//     recognition.onstart = () => setListening(true);
+//     recognition.onend = () => setListening(false);
+//     recognition.onresult = (e) => {
+//       const transcript = e.results[0][0].transcript;
+//       setInput(transcript);
+//     };
+//     recognition.start();
+//     recognitionRef.current = recognition;
+//   };
+
+//   const resolveImageSrc = (val) => {
+//     if (!val) return null;
+//     if (val.startsWith("data:")) return val;
+//     if (/^https?:\/\//i.test(val)) return val;
+//     return `data:image/png;base64,${val}`;
+//   };
+
+//   return (
+//     <div className={`chat-container ${darkMode ? "dark" : ""}`}>
+//       <div className="chat-box">
+//         {messages.map((msg) => {
+//           if (msg.sender === "bot-typing") {
+//             return (
+//               <div key={msg.id} className="chat-row bot">
+//                 <div className="message-bubble bot typing">
+//                   <span className="typing-dots">
+//                     <span></span>
+//                     <span></span>
+//                     <span></span>
+//                   </span>
+//                 </div>
+//               </div>
+//             );
+//           }
+
+//           const isBot = msg.sender === "bot";
+//           const imgSrc = resolveImageSrc(msg.image);
+
+//           return (
+//             <div key={msg.id} className={`chat-row ${msg.sender}`}>
+//               {isBot && <img src="/robot.png" alt="bot" className="chat-avatar" />}
+
+//               <div className="chat-content">
+//                 <div className={`message-bubble ${msg.sender}`}>
+//                   <div className="bubble-row">
+//                     <span>{msg.text}</span>
+//                     {isBot && msg.audioBase64 && (
+//                       <button
+//                         className="tts-btn"
+//                         title={t("chat.playAudio") || "Play audio"}
+//                         onClick={() => playTTS(msg.audioBase64)}
+//                       >
+//                         🔊
+//                       </button>
+//                     )}
+//                   </div>
+//                 </div>
+
+//                 {isBot && imgSrc && (
+//                   <img src={imgSrc} alt="generated" className="chat-generated-image" />
+//                 )}
+//               </div>
+//             </div>
+//           );
+//         })}
+//         <div ref={messagesEndRef} />
+//       </div>
+
+//       <div className="chat-input-container">
+//         <input
+//           type="text"
+//           className="chat-input"
+//           value={input}
+//           placeholder={t("chat.placeholder")}
+//           onChange={(e) => setInput(e.target.value)}
+//           onKeyDown={(e) => e.key === "Enter" && handleSend()}
+//         />
+//         <button className={`mic-btn ${listening ? "active" : ""}`} onClick={startListening}>
+//           {listening ? t("chat.listening") : t("chat.mic")}
+//         </button>
+//         <button className="send-btn" onClick={handleSend}>
+//           {t("chat.send")}
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
+
+
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import "./../styles/Chat.css";
@@ -160,7 +354,6 @@ const API = "http://localhost:8000/api/v1/chat";
 export default function Chat({ username, darkMode }) {
   const { t, i18n } = useTranslation();
 
-  // Chat messages
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -168,136 +361,260 @@ export default function Chat({ username, darkMode }) {
       sender: "bot",
     },
   ]);
-
-  // Input & options
   const [input, setInput] = useState("");
-  const [generateImage, setGenerateImage] = useState(false);
-
-  // Speech-to-text
+  const generateImage = true;
   const [listening, setListening] = useState(false);
+
   const recognitionRef = useRef(null);
-
-  // Refs for auto-scroll
   const messagesEndRef = useRef(null);
-  const chatBoxRef     = useRef(null);
 
-  // Scroll to bottom whenever messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // SEND handler: calls backend, plays TTS, displays image
+  const logoutAndRedirect = (msg = "Session expired. Please log in again.") => {
+    try {
+      localStorage.removeItem("token");
+    } catch (_) {}
+    alert(msg);
+    setMessages((prev) => prev.filter((m) => m.sender !== "bot-typing"));
+    window.location.href = "/";
+  };
+
+  const playTTS = (audioBase64) => {
+    if (!audioBase64) return;
+    const audio = new Audio(`data:audio/mp3;base64,${audioBase64}`);
+    audio.play().catch(() => {});
+  };
+
+  const extractErrorDetail = async (resp) => {
+    try {
+      const data = await resp.clone().json();
+      if (typeof data === "string") return data;
+      if (data?.detail) {
+        if (typeof data.detail === "string") return data.detail;
+        if (Array.isArray(data.detail)) {
+          return data.detail.map((d) => d?.msg || d).join("; ");
+        }
+        if (typeof data.detail === "object") {
+          return JSON.stringify(data.detail);
+        }
+      }
+      return JSON.stringify(data);
+    } catch (_) {
+      try {
+        return await resp.text();
+      } catch (__) {
+        return resp.statusText || "Unknown error";
+      }
+    }
+  };
+
+  const getSpeechRecognition = () =>
+    window.SpeechRecognition || window.webkitSpeechRecognition || null;
+
+  const getSpeechLang = () => {
+    const lang = i18n.language || "en";
+    if (lang.startsWith("ar")) return "ar-SA";
+    if (lang.startsWith("en")) return "en-US";
+    return "en-US";
+  };
+
+  useEffect(() => {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+    if (!SR) return;
+  
+    let rec = recognitionRef.current;
+  
+    if (!rec) {
+      rec = new SR();
+      rec.continuous = false;
+      rec.interimResults = false;
+  
+      rec.onstart = () => setListening(true);
+      rec.onend = () => setListening(false);
+      rec.onerror = (e) => {
+        setListening(false);
+        if (e?.error === "not-allowed" || e?.error === "service-not-allowed") {
+          alert(t("chat.micBlocked") || "Microphone permission is blocked in your browser.");
+        }
+      };
+      rec.onresult = (e) => {
+        const transcript = e?.results?.[0]?.[0]?.transcript || "";
+        if (transcript) setInput(transcript);
+        // Optionally auto-send:
+        // if (transcript) setTimeout(() => handleSend(), 0);
+      };
+  
+      recognitionRef.current = rec;
+    }
+  
+    // keep language in sync with i18n
+    const lang = i18n.language?.startsWith("ar") ? "ar-SA" : "en-US";
+    rec.lang = lang;
+  
+    // cleanup
+    return () => {
+      try { rec.stop(); } catch {}
+    };
+  }, [i18n.language, t]); // no eslint-disable needed
+  
+
   const handleSend = async () => {
     const text = input.trim();
     if (!text) return;
 
-    console.log("🔥 handleSend()", { text, generateImage });
-
-    // show user message
-    setMessages(prev => [
-      ...prev,
-      { id: Date.now(), text, sender: "user" },
-    ]);
+    setMessages((prev) => [...prev, { id: Date.now(), text, sender: "user" }]);
     setInput("");
 
     const token = localStorage.getItem("token");
-    console.log("🔑 token:", token);
     if (!token) {
       alert("⚠️ You must be logged in to chat.");
+      window.location.href = "/";
       return;
     }
-    
+
+    const typingId = Date.now() + 0.5;
+    setMessages((prev) => [
+      ...prev,
+      { id: typingId, text: "typing", sender: "bot-typing" },
+    ]);
 
     try {
-      console.log("🌐 calling fetch to", API + "/");
       const resp = await fetch(API + "/", {
         method: "POST",
         headers: {
-          "Content-Type":  "application/json",
-          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ text, generate_image: generateImage }),
       });
-      console.log("🌐 response status:", resp.status);
 
       if (!resp.ok) {
-        const err = await resp.json().catch(() => ({}));
-        console.error("❌ backend error payload:", err);
-        throw new Error(err.detail || resp.statusText);
+        const detail = (await extractErrorDetail(resp)) || "";
+        const normalized = String(detail);
+
+        if (
+          normalized.includes("Invalid token subject") ||
+          normalized.includes("⚠️ Invalid token subject")
+        ) {
+          logoutAndRedirect("Session expired. Please log in again.");
+          return;
+        }
+
+        throw new Error(normalized);
       }
 
       const data = await resp.json();
-      console.log("📨 ChatResponse JSON:", data);
 
-      // play TTS audio
-      if (data.audio_base64) {
-        new Audio(`data:audio/mp3;base64,${data.audio_base64}`)
-          .play()
-          .catch(() => {});
-      }
-
-      // append bot reply (and optional image)
-      setMessages(prev => [
-        ...prev,
-        {
-          id:    Date.now() + 1,
-          text:  data.text,
-          sender:"bot",
-          image: data.image_url,    // base64 or URL from backend
-        },
-      ]);
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === typingId
+            ? {
+                id: Date.now() + 1,
+                text: data.text,
+                sender: "bot",
+                image: data.image_url || null,
+                audioBase64: data.audio_base64 || null,
+              }
+            : m
+        )
+      );
     } catch (e) {
-      console.error("💥 handleSend caught:", e);
-      setMessages(prev => [
-        ...prev,
-        { id: Date.now() + 2, text: "⚠️ " + e.message, sender: "bot" },
-      ]);
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === typingId
+            ? {
+                id: Date.now() + 2,
+                text: "⚠️ " + (e.message || String(e)),
+                sender: "bot",
+              }
+            : m
+        )
+      );
     }
   };
 
-  // Start browser speech recognition
-  const startListening = () => {
-    if (!("webkitSpeechRecognition" in window)) {
-      alert("⚠️ Your browser does not support speech recognition.");
+  const toggleListening = () => {
+    const SR = getSpeechRecognition();
+    if (!SR) {
+      alert("⚠️ " + (t("chat.noSpeechAPI") || "Your browser does not support speech recognition."));
       return;
     }
+    const rec = recognitionRef.current;
+    if (!rec) return;
 
-    const recognition = new window.webkitSpeechRecognition();
-    recognition.lang = i18n.language === "en" ? "en-US" : "ar-SA";
-    recognition.continuous = false;
-    recognition.interimResults = false;
+    try {
+      if (listening) {
+        rec.stop();
+      } else {
+        // must be HTTPS or localhost + user gesture
+        rec.lang = getSpeechLang();
+        rec.start();
+      }
+    } catch (err) {
+      alert(
+        t("chat.micStartFail") ||
+          "Could not access the microphone. Ensure HTTPS/localhost and allow mic permissions."
+      );
+    }
+  };
 
-    recognition.onstart = () => setListening(true);
-    recognition.onend   = () => setListening(false);
-
-    recognition.onresult = (e) => {
-      const transcript = e.results[0][0].transcript;
-      setInput(transcript);
-    };
-
-    recognition.start();
-    recognitionRef.current = recognition;
+  const resolveImageSrc = (val) => {
+    if (!val) return null;
+    if (val.startsWith("data:")) return val;
+    if (/^https?:\/\//i.test(val)) return val;
+    return `data:image/png;base64,${val}`;
   };
 
   return (
     <div className={`chat-container ${darkMode ? "dark" : ""}`}>
-      <div className="chat-box" ref={chatBoxRef}>
-        {messages.map(msg => (
-          <div key={msg.id} className={`chat-message ${msg.sender}`}>
-            <div className="message-bubble">
-              {msg.text}
-              {msg.image && (
-                <img
-                  src={msg.image.startsWith("data:")
-                    ? msg.image
-                    : `data:image/png;base64,${msg.image}`}
-                  alt="generated"
-                  className="chat-image"
-                />
-              )}
+      <div className="chat-box">
+        {messages.map((msg) => {
+          if (msg.sender === "bot-typing") {
+            return (
+              <div key={msg.id} className="chat-row bot">
+                <div className="message-bubble bot typing">
+                  <span className="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </span>
+                </div>
+              </div>
+            );
+          }
+
+          const isBot = msg.sender === "bot";
+          const imgSrc = resolveImageSrc(msg.image);
+
+          return (
+            <div key={msg.id} className={`chat-row ${msg.sender}`}>
+              {isBot && <img src="/robot.png" alt="bot" className="chat-avatar" />}
+
+              <div className="chat-content">
+                <div className={`message-bubble ${msg.sender}`}>
+                  <div className="bubble-row">
+                    <span>{msg.text}</span>
+                    {isBot && msg.audioBase64 && (
+                      <button
+                        className="tts-btn"
+                        title={t("chat.playAudio") || "Play audio"}
+                        onClick={() => playTTS(msg.audioBase64)}
+                      >
+                        🔊
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {isBot && imgSrc && (
+                  <img src={imgSrc} alt="generated" className="chat-generated-image" />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         <div ref={messagesEndRef} />
       </div>
 
@@ -307,26 +624,12 @@ export default function Chat({ username, darkMode }) {
           className="chat-input"
           value={input}
           placeholder={t("chat.placeholder")}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={e => e.key === "Enter" && handleSend()}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSend()}
         />
-
-        <button
-          className={`mic-btn ${listening ? "active" : ""}`}
-          onClick={startListening}
-        >
+        <button className={`mic-btn ${listening ? "active" : ""}`} onClick={toggleListening}>
           {listening ? t("chat.listening") : t("chat.mic")}
         </button>
-
-        <label className="image-toggle">
-          <input
-            type="checkbox"
-            checked={generateImage}
-            onChange={e => setGenerateImage(e.target.checked)}
-          />{" "}
-          {t("chat.generateImage")}
-        </label>
-
         <button className="send-btn" onClick={handleSend}>
           {t("chat.send")}
         </button>

@@ -37,7 +37,7 @@ class UserService:
 
         if not user or not user_token.verify_password(password, user.password):
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
-
+        print({"sub": str(user.id)})
         access_token=user_token.create_access_token({"sub": str(user.id)})
 
         return Token(access_token=access_token)

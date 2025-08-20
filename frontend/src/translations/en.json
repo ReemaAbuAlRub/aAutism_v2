@@ -1,5 +1,6 @@
 {
     "appName": "Autism Assistant",
+    "Profile_Title": "✏️ Edit Profile",
     "welcomeTitle": "Hello {{name}} 🌼, I'm here to help you feel comfortable.",
     "startBtn": "Let's Start",
     "howDoYouFeel": "How do you feel today?",

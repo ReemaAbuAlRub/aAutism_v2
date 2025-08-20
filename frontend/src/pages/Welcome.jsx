@@ -113,3 +113,4 @@ export default function Welcome({ username, avatar, darkMode }) {
         </div>
     );
 }
+
