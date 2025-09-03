@@ -349,7 +349,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import "./../styles/Chat.css";
 
-const API = "http://localhost:8000/api/v1/chat";
+const API = "https://frontend.ashymeadow-e605a82c.uaenorth.azurecontainerapps.io/api/v1//chat";
 
 export default function Chat({ username, darkMode }) {
   const { t, i18n } = useTranslation();

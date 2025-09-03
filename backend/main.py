@@ -10,7 +10,9 @@ def initiate_application() -> FastAPI :
     app=FastAPI(title="Autism Chatbot", version="02")
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost:3000"],
+        allow_origins=["http://localhost:3000",
+        "https://frontend.ashymeadow-e605a82c.uaenorth.azurecontainerapps.io",
+        "*" ],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],

@@ -84,7 +84,7 @@ import { useTranslation } from "react-i18next";
 import LeftPanel from "../components/LeftPanel";
 import "../styles/SignupPage.css";
 
-const API_BASE = "http://localhost:8000/api/v1";
+const API_BASE = "https://frontend.ashymeadow-e605a82c.uaenorth.azurecontainerapps.io/api/v1";
 const LOGIN_URL = `${API_BASE}/user/login`;
 const ME_URL = `${API_BASE}/user/me`;
 
